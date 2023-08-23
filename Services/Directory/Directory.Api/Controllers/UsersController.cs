@@ -40,7 +40,7 @@ namespace Directory.Api.Controllers
        
 
         [HttpPost]
-        public async Task<IActionResult> Create(UserDto userDto)
+        public async Task<IActionResult> Create(UserCreateDTO userDto)
         {
             var response = await _userServices.CreateAsync(userDto);
 

@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,16 +27,29 @@ namespace Directory.Business.Implementation
 
             _userCollection = database.GetCollection<User>("Users");
 
+            MapperConfiguration config = autoMapperConfig();
+            _mapper = config.CreateMapper();
         }
-     
+
+        private MapperConfiguration autoMapperConfig()
+        {
+            return new MapperConfiguration(cfg =>
+            {
+
+                cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<User, UserCreateDTO>();
+
+            });
+        }
+
         public async Task<Response<List<UserDto>>> GetAllAsync()
         {
-            var categories = await _userCollection.Find(user => true).ToListAsync();
+            var users = await _userCollection.Find(user => true).ToListAsync();
 
-            return Response<List<UserDto>>.Success(_mapper.Map<List<UserDto>>(categories), 200);
+            return Response<List<UserDto>>.Success(_mapper.Map<List<UserDto>>(users), 200);
         }
 
-        public async Task<Response<UserDto>> CreateAsync(UserDto userDto)
+        public async Task<Response<UserDto>> CreateAsync(UserCreateDTO userDto)
         {
             var user = _mapper.Map<User>(userDto);
             await _userCollection.InsertOneAsync(user);
