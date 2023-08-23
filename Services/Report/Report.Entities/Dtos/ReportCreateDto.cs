@@ -6,20 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Directory.Entities.Entity
+namespace Report.Entities.Dtos
 {
-    public class ContactInfo
+    public class ReportCreateDto
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
         public string UserId { get; set; }
 
-        public string Email { get; set; }
-
-        public string Phone { get; set; }
-
         public string Location { get; set; }
+        public int Status { get; set; }
+        public DateTime CreatedTime { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Directory.Business.Interface
     public interface IUserServices
     {
         Task<Response<List<UserDto>>> GetAllAsync();
-        Task<Response<UserDto>> CreateAsync(UserDto userDto);
+        Task<Response<UserDto>> CreateAsync(UserCreateDTO userDto);
         Task<Response<UserDto>> GetByIdAsync(string id);
 
         Task<Response<NoContent>> UpdateAsync(UserDto userDto);

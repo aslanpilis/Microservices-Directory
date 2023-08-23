@@ -1,17 +1,13 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Directory.Entities.Entity
+namespace Directory.Entities.Dtos
 {
-    public class ContactInfo
+    public class ContactInfoDto
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
         public string UserId { get; set; }
@@ -21,5 +17,6 @@ namespace Directory.Entities.Entity
         public string Phone { get; set; }
 
         public string Location { get; set; }
+
     }
 }

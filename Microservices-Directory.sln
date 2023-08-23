@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report.Entities", "Services
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Shared\Core\Core.csproj", "{F37B2233-54B0-4891-AE7A-572279C8A3F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Directory.Api", "Services\Directory\Directory.Api\Directory.Api.csproj", "{559E7FEC-AD85-4D4E-A8A0-B3CF53D71717}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Directory.Api", "Services\Directory\Directory.Api\Directory.Api.csproj", "{559E7FEC-AD85-4D4E-A8A0-B3CF53D71717}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Report.Business", "Services\Report\Report.Business\Report.Business.csproj", "{6E16809C-909E-4D36-AF26-E45F2858475E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report.Business", "Services\Report\Report.Business\Report.Business.csproj", "{6E16809C-909E-4D36-AF26-E45F2858475E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{67BBA1B7-09A4-4AAF-A3FD-447EEE1C73F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,7 @@ Global
 		{F37B2233-54B0-4891-AE7A-572279C8A3F7} = {2A565BFF-5F23-4380-A882-78571BDC832A}
 		{559E7FEC-AD85-4D4E-A8A0-B3CF53D71717} = {753885F0-9C5F-4FB3-8A08-F02F433F2115}
 		{6E16809C-909E-4D36-AF26-E45F2858475E} = {65EBD4B2-B8BC-45DD-B336-678CDB8D9160}
+		{67BBA1B7-09A4-4AAF-A3FD-447EEE1C73F4} = {1365815E-3DDD-4AEE-976E-FF456C45A868}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FBEE1E3-C2D1-48CE-A144-DCFFEA9FAA95}
