@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace Directory.Api
 {
@@ -35,6 +36,7 @@ namespace Directory.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Directory.Api", Version = "v1" });
             });
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<IUserServices, UserServices>();
 
