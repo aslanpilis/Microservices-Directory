@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Dtos;
+using Directory.Business.Interface;
 using Directory.Entities.Dtos;
 using Directory.Entities.Entity;
 using MongoDB.Driver;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Directory.Business.Implementation
 {
-    public class ContactInfoServices
+    public class ContactInfoServices: IContactInfoServices
     {
 
       
@@ -37,6 +38,7 @@ namespace Directory.Business.Implementation
             return new MapperConfiguration(cfg =>
             {
 
+                cfg.CreateMap<ContactInfoCreateDto, ContactInfo>();
                 cfg.CreateMap<ContactInfo, ContactInfoCreateDto>();
                 cfg.CreateMap<ContactInfo, ContactInfoDto>();
 
@@ -58,6 +60,29 @@ namespace Directory.Business.Implementation
 
             return Response<ContactInfoDto>.Success(_mapper.Map<ContactInfoDto>(ContactInfo), 200);
         }
+        public async Task<Response<List<ContactInfoDto>>> GetAllByUserIdAsync(string userId)
+        {
+            var contactInfos = await _contactInfoCollection.Find<ContactInfo>(x => x.UserId == userId).ToListAsync();
+
+            return Response<List<ContactInfoDto>>.Success(_mapper.Map<List<ContactInfoDto>>(contactInfos), 200);
+        }  
+        
+        public async Task<Response<ReportContactInfoDto>> GetReportByLocationAsync(string location)
+        {
+            var contactInfos = await _contactInfoCollection.Find<ContactInfo>(x => x.Location == location).ToListAsync();
+
+            var usercount= contactInfos.Select(p => p.UserId).Distinct().Count();
+
+            var phonecount = contactInfos.Select(p => p.Phone).Distinct().Count();
+
+            var reportContactInfoDto =new ReportContactInfoDto();
+            reportContactInfoDto.Location = location;
+            reportContactInfoDto.UserCount = usercount;
+            reportContactInfoDto.PhoneCount = phonecount;
+
+            return Response<ReportContactInfoDto>.Success(reportContactInfoDto, 200);
+        }
+
 
         public async Task<Response<ContactInfoDto>> GetByIdAsync(string id)
         {

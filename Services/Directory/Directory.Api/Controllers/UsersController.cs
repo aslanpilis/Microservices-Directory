@@ -28,7 +28,7 @@ namespace Directory.Api.Controllers
             return BaseActionResult(response);
         }
 
-        //courses/5
+       
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {

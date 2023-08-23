@@ -36,9 +36,9 @@ namespace Directory.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Directory.Api", Version = "v1" });
             });
-            services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<IUserServices, UserServices>();
+            services.AddScoped<IContactInfoServices, ContactInfoServices>();
 
         }
 

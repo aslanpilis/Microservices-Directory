@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace Directory.Entities.Dtos
 {
-    public class ContactInfoDto
+    public class ReportContactInfoDto
     {
-        public string Id { get; set; }
 
-        public string UserId { get; set; }
+        public int UserCount { get; set; }
 
-        public string Email { get; set; }
-
-        public string Phone { get; set; }
+        public int PhoneCount { get; set; }
 
         public string Location { get; set; }
 
