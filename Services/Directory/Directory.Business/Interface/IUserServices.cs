@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Directory.Entities.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Directory.Business.Interface
 {
     public interface IUserServices
     {
+        Task<string> CreateAsync(User obj);
     }
 }

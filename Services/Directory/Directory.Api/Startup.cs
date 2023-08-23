@@ -1,4 +1,7 @@
+using Directory.Business.Implementation;
+using Directory.Business.Interface;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +35,9 @@ namespace Directory.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Directory.Api", Version = "v1" });
             });
+
+            services.AddScoped<IUserServices, UserServices>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

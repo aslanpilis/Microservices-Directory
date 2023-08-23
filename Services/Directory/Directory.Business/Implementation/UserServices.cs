@@ -22,8 +22,14 @@ namespace Directory.Business.Implementation
 
             _userCollection = database.GetCollection<User>("Users");
 
-        }   
+        }
+        public async Task<string> CreateAsync(User obj)
+        {
+            //var category = _mapper.Map<Category>(categoryDto);
+            await _userCollection.InsertOneAsync(obj);
 
+            return "";
+        }
 
 
 
