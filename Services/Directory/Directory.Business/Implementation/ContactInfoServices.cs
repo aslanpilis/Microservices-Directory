@@ -1,4 +1,9 @@
-﻿using System;
+﻿using AutoMapper;
+using Core.Dtos;
+using Directory.Entities.Dtos;
+using Directory.Entities.Entity;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +14,91 @@ namespace Directory.Business.Implementation
     public class ContactInfoServices
     {
 
-        public ContactInfoServices() { }    
+      
+        private readonly IMongoCollection<ContactInfo> _contactInfoCollection;
+        const string connectionUri = "mongodb+srv://aslanpilis:a2RaTjeXQzcn1XZu@cluster0.izpn5l8.mongodb.net/?retryWrites=true&w=majority";
+        private readonly IMapper _mapper;
+
+        public ContactInfoServices()
+        {
+
+            var client = new MongoClient(connectionUri);
+
+            var database = client.GetDatabase("Directory");
+
+            _contactInfoCollection = database.GetCollection<ContactInfo>("ContactInfos");
+
+            MapperConfiguration config = autoMapperConfig();
+            _mapper = config.CreateMapper();
+        }
+
+        private MapperConfiguration autoMapperConfig()
+        {
+            return new MapperConfiguration(cfg =>
+            {
+
+                cfg.CreateMap<ContactInfo, ContactInfoCreateDto>();
+                cfg.CreateMap<ContactInfo, ContactInfoDto>();
+
+            });
+        }
+
+
+        public async Task<Response<List<ContactInfoDto>>> GetAllAsync()
+        {
+            var ContactInfos = await _contactInfoCollection.Find(ContactInfo => true).ToListAsync();
+
+            return Response<List<ContactInfoDto>>.Success(_mapper.Map<List<ContactInfoDto>>(ContactInfos), 200);
+        }
+
+        public async Task<Response<ContactInfoDto>> CreateAsync(ContactInfoCreateDto ContactInfoDto)
+        {
+            var ContactInfo = _mapper.Map<ContactInfo>(ContactInfoDto);
+            await _contactInfoCollection.InsertOneAsync(ContactInfo);
+
+            return Response<ContactInfoDto>.Success(_mapper.Map<ContactInfoDto>(ContactInfo), 200);
+        }
+
+        public async Task<Response<ContactInfoDto>> GetByIdAsync(string id)
+        {
+            var ContactInfo = await _contactInfoCollection.Find<ContactInfo>(x => x.Id == id).FirstOrDefaultAsync();
+
+
+            if (ContactInfo == null)
+            {
+                return Response<ContactInfoDto>.Fail("ContactInfo not found", 404);
+            }
+
+            return Response<ContactInfoDto>.Success(_mapper.Map<ContactInfoDto>(ContactInfo), 200);
+        }
+        public async Task<Response<NoContent>> UpdateAsync(ContactInfoDto ContactInfoDto)
+        {
+            var updateContactInfo = _mapper.Map<ContactInfo>(ContactInfoDto);
+
+            var result = await _contactInfoCollection.FindOneAndReplaceAsync(x => x.Id == ContactInfoDto.Id, updateContactInfo);
+
+            if (result == null)
+            {
+                return Response<NoContent>.Fail("ContactInfo not found", 404);
+            }
+
+
+            return Response<NoContent>.Success(204);
+        }
+        public async Task<Response<NoContent>> DeleteAsync(string id)
+        {
+            var result = await _contactInfoCollection.DeleteOneAsync(x => x.Id == id);
+
+            if (result.DeletedCount > 0)
+            {
+                return Response<NoContent>.Success(204);
+            }
+            else
+            {
+                return Response<NoContent>.Fail("ContactInfo not found", 404);
+            }
+        }
+
+
     }
 }
