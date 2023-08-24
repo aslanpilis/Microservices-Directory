@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Utilities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Core.Filter
            
             var token = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
-            var id =  JwtHelper.JwtHelper.ValidateToken(token);
+            var id =  JwtHelper.ValidateToken(token);
             if (!string.IsNullOrEmpty(id))
             {
                 context.Result = new UnauthorizedResult();

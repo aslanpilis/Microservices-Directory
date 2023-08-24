@@ -1,4 +1,4 @@
-﻿using Core.JwtHelper;
+﻿using Core.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

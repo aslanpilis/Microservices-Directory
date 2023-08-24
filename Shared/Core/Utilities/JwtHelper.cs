@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.JwtHelper
+namespace Core.Utilities
 {
     public static class JwtHelper
     {
@@ -22,7 +22,7 @@ namespace Core.JwtHelper
             return tokenS;
         }
 
-        public static string GenerateSecurityToken(string id,string role)
+        public static string GenerateSecurityToken(string id, string role)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("MicroservicesTokenMicroservicesToken");
@@ -30,10 +30,10 @@ namespace Core.JwtHelper
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-               
+
                     new Claim("id", id),
                     new Claim("Role", role),
-           
+
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

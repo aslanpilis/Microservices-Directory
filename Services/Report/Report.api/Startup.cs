@@ -30,6 +30,9 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using Core.AzureServiceBus;
+using Microsoft.Azure.ServiceBus.Management;
+
 namespace Report.api
 {
     public class Startup
@@ -47,6 +50,8 @@ namespace Report.api
 
             services.AddControllers();
             services.AddScoped<IReportServices, ReportServices>();
+            services.AddSingleton<ProducerServices>();
+            services.AddSingleton<ManagementClient>(i => new ManagementClient(BusConstants.ConnectionString));
 
             services.AddSwaggerGen(c =>
             {

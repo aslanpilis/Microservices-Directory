@@ -9,6 +9,7 @@ using Core.Dtos;
 using Report.Entities.Dtos;
 using AutoMapper;
 using Report.Business.Interface;
+using Core.AzureServiceBus;
 
 namespace Report.Business.Implementation
 {
@@ -17,8 +18,9 @@ namespace Report.Business.Implementation
         private readonly IMongoCollection<Reports> _reportCollection;
         const string connectionUri = "mongodb+srv://aslanpilis:a2RaTjeXQzcn1XZu@cluster0.izpn5l8.mongodb.net/?retryWrites=true&w=majority";
         private readonly IMapper _mapper;
+        private readonly ProducerServices _producerServices ;
 
-        public ReportServices()
+        public ReportServices(ProducerServices producerServices)
         {
 
             var client = new MongoClient(connectionUri);
@@ -27,7 +29,10 @@ namespace Report.Business.Implementation
 
             _reportCollection = database.GetCollection<Reports>("Reports");
 
-           
+            _producerServices = producerServices;
+
+            MapperConfiguration config = autoMapperConfig();
+            _mapper = config.CreateMapper();
         }
         private MapperConfiguration autoMapperConfig()
         {
@@ -35,6 +40,7 @@ namespace Report.Business.Implementation
             {
 
                 cfg.CreateMap<Reports, ReportCreateDto>();
+                cfg.CreateMap<ReportCreateDto, Reports>();
                 cfg.CreateMap<Reports, ReportUpdateDto>();
                 cfg.CreateMap<Reports, ReportDto>();
                 
@@ -45,6 +51,7 @@ namespace Report.Business.Implementation
         {
             var  reports = _mapper.Map<Reports>(reportCreateDto);
             await _reportCollection.InsertOneAsync(reports);
+            await _producerServices.SendMessageToQueue(BusConstants.directoryCreatedQueue, reports);
 
             return Response<ReportDto>.Success(_mapper.Map<ReportDto>(reports), 200);
         } 
@@ -72,6 +79,11 @@ namespace Report.Business.Implementation
 
             return Response<List<ReportDto>>.Success(_mapper.Map<List<ReportDto>>(reports), 200);
         }
+        public async Task<Response<List<ReportDto>>> GetAllAsync()
+        {
+            var reports = await _reportCollection.Find(report => true).ToListAsync();
 
+            return Response<List<ReportDto>>.Success(_mapper.Map<List<ReportDto>>(reports), 200);
+        }
     }
 }
