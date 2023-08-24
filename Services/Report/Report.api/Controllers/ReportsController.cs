@@ -10,9 +10,17 @@ namespace Report.api.Controllers
     public class ReportsController : BaseController
     {
         private readonly IReportServices _reportServices;
-        ReportsController(IReportServices reportServices)
+        public ReportsController(IReportServices reportServices)
         {
             _reportServices= reportServices;    
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var response = await _reportServices.GetAllAsync();
+
+            return BaseActionResult(response);
         }
 
         [HttpPost]

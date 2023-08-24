@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Utilities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
@@ -13,32 +14,27 @@ namespace Core.Filter
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var token = context.HttpContext.Request.Headers.ContainsKey("authorization");
-            if (!token)
+      
+            if (!context.HttpContext.Request.Headers.ContainsKey("authorization"))
             {
                 //context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Unauthorized);
                 context.Result = new UnauthorizedResult();
 
                 return;
             }
+           
+            var token = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
-            JwtSecurityToken tokenS = getToken(context);
-            if (tokenS.ValidTo < DateTime.Now)
+            var id =  JwtHelper.ValidateToken(token);
+            if (!string.IsNullOrEmpty(id))
             {
                 context.Result = new UnauthorizedResult();
                 return;
             }
+
+
         }
-        private JwtSecurityToken getToken(AuthorizationFilterContext context)
-        {
-            if (!context.HttpContext.Request.Headers.ContainsKey("authorization")) return null;
-            var token = context.HttpContext.Request.Headers["authorization"].ToString();
-            if (token == null) return null;
-            var handler = new JwtSecurityTokenHandler();
-            var jsonToken = handler.ReadToken(token);
-            var tokenS = jsonToken as JwtSecurityToken;
-            return tokenS;
-        }
+     
 
     }
 }

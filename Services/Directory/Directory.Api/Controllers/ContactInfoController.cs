@@ -44,7 +44,7 @@ namespace Directory.Api.Controllers
         } 
         
         [HttpGet]
-        [Route("/api/[controller]/GetAllByUserId/{location}")]
+        [Route("/api/[controller]/GetAllByLocation/{location}")]
         public async Task<IActionResult> GetAllByLocation(string location)
         {
             var response = await _contactInfoServices.GetReportByLocationAsync(location);

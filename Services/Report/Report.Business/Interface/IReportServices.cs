@@ -13,5 +13,6 @@ namespace Report.Business.Interface
         Task<Response<ReportDto>> CreateAsync(ReportCreateDto reportCreateDto);
         Task<Response<ReportDto>> UpdateAsync(ReportUpdateDto reportUpdateDto);
         Task<Response<List<ReportDto>>> GetAllByUserIdAsync(string userId);
+        Task<Response<List<ReportDto>>> GetAllAsync();
     }
 }

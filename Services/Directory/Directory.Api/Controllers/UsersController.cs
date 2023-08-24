@@ -1,4 +1,5 @@
-﻿using Directory.Business.Interface;
+﻿using Core.Filter;
+using Directory.Business.Interface;
 using Directory.Entities.Dtos;
 using Directory.Entities.Entity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ namespace Directory.Api.Controllers
 
     [ApiController]
     [Route("[controller]")]
+    [ApiCustomAuthorize]
     public class UsersController : BaseController
     {
 
