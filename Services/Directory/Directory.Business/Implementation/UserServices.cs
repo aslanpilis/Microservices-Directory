@@ -39,6 +39,7 @@ namespace Directory.Business.Implementation
 
                 cfg.CreateMap<User, UserDto>();
                 cfg.CreateMap<User, UserCreateDTO>();
+                cfg.CreateMap<UserCreateDTO, User>();
 
             });
         }
