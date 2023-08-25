@@ -26,7 +26,7 @@ namespace Core.Filter
             var token = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             var id =  JwtHelper.ValidateToken(token);
-            if (!string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(id))
             {
                 context.Result = new UnauthorizedResult();
                 return;

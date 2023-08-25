@@ -10,20 +10,20 @@ using Report.Entities.Dtos;
 using AutoMapper;
 using Report.Business.Interface;
 using Core.AzureServiceBus;
+using Core.Utilities;
 
 namespace Report.Business.Implementation
 {
     public class ReportServices: IReportServices
     {
         private readonly IMongoCollection<Reports> _reportCollection;
-        const string connectionUri = "mongodb+srv://aslanpilis:a2RaTjeXQzcn1XZu@cluster0.izpn5l8.mongodb.net/?retryWrites=true&w=majority";
         private readonly IMapper _mapper;
         private readonly ProducerServices _producerServices ;
 
         public ReportServices(ProducerServices producerServices)
         {
 
-            var client = new MongoClient(connectionUri);
+            var client = new MongoClient(HelperConstants.MongodbConnectionUri);
 
             var database = client.GetDatabase("Report");
 

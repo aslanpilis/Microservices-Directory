@@ -10,6 +10,6 @@ namespace Core.Utilities
     {
         public const string ReportUrl = "https://localhost:44375/Reports";
         public const string GetAllByLocationUrl = "https://localhost:44385/api/ContactInfo/GetAllByLocation/";
-       
+        public const string MongodbConnectionUri = "mongodb+srv://aslanpilis:a2RaTjeXQzcn1XZu@cluster0.izpn5l8.mongodb.net/?retryWrites=true&w=majority";
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Dtos;
+using Core.Utilities;
 using Directory.Business.Interface;
 using Directory.Entities.Dtos;
 using Directory.Entities.Entity;
@@ -16,12 +17,12 @@ namespace Directory.Business.Implementation
     public class UserServices: IUserServices
     {
         private readonly IMongoCollection<User> _userCollection;
-        const string connectionUri = "mongodb+srv://aslanpilis:a2RaTjeXQzcn1XZu@cluster0.izpn5l8.mongodb.net/?retryWrites=true&w=majority";
+  
         private readonly IMapper _mapper;
 
         public UserServices() {
 
-            var client = new MongoClient(connectionUri);
+            var client = new MongoClient(HelperConstants.MongodbConnectionUri);
 
             var database = client.GetDatabase("Directory");
 

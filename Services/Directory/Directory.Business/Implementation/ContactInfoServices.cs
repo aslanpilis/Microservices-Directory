@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Dtos;
+using Core.Utilities;
 using Directory.Business.Interface;
 using Directory.Entities.Dtos;
 using Directory.Entities.Entity;
@@ -23,7 +24,7 @@ namespace Directory.Business.Implementation
         public ContactInfoServices()
         {
 
-            var client = new MongoClient(connectionUri);
+            var client = new MongoClient(HelperConstants.MongodbConnectionUri);
 
             var database = client.GetDatabase("Directory");
 

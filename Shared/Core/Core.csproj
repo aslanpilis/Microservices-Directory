@@ -5,14 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="JwtHelper\**" />
+    <EmbeddedResource Remove="JwtHelper\**" />
+    <None Remove="JwtHelper\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.Azure.ServiceBus" Version="5.2.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="JwtHelper\" />
   </ItemGroup>
 
 </Project>

@@ -38,7 +38,6 @@ namespace Consumer.Services
 
                 await servis.UpdateReport(updatemodel);   
 
-                Console.WriteLine($"OrderCreatedEvent ReceivedMessage with id: {item.Id}");
             }).Wait();
 
       

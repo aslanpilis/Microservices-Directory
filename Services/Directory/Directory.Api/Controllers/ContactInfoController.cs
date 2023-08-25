@@ -1,4 +1,5 @@
-﻿using Directory.Business.Implementation;
+﻿using Core.Filter;
+using Directory.Business.Implementation;
 using Directory.Business.Interface;
 using Directory.Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ namespace Directory.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    //[ApiCustomAuthorize]
     public class ContactInfoController : BaseController
     {
         private readonly IContactInfoServices _contactInfoServices ;

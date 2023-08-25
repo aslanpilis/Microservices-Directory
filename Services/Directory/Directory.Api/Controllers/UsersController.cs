@@ -10,7 +10,7 @@ namespace Directory.Api.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    [ApiCustomAuthorize]
+    //[ApiCustomAuthorize]
     public class UsersController : BaseController
     {
 
