@@ -46,7 +46,7 @@
        * Tüm servislerin kullandığı araçalarının buluduğu katmandır 
 
    #### Not  ; 
-       * Projeyi çalıştırmak için tum  servis ayağa kaldırmaknız yeterli olacaktır .Tüm konfigürasyon activdir.
+       * Projeyi çalıştırmak için tum  servis ayağa kaldırmaknız yeterli olacaktır .Tüm konfigürasyon aktif (mongodb,azurservisbus).
        *Şuanda tüm authenticationalar devre dışı test etmeyi kolaylaştırmak için
 
 
