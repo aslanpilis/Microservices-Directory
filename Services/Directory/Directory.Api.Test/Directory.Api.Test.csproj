@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Report.api\Report.api.csproj" />
+    <ProjectReference Include="..\Directory.Api\Directory.Api.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@
 
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -12,12 +12,12 @@
       ],
       "UpstreamPathTemplate": "/services/Directory/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "UpstreamScheme": "https"
+      "UpstreamScheme": "http"
 
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -32,6 +32,6 @@
     
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:44366"
+    "BaseUrl": "http://localhost:44366"
   }
 }

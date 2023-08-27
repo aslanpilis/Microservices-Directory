@@ -41,6 +41,7 @@ namespace Directory.Business.Implementation
 
                 cfg.CreateMap<ContactInfoCreateDto, ContactInfo>();
                 cfg.CreateMap<ContactInfo, ContactInfoCreateDto>();
+                cfg.CreateMap<ContactInfoDto, ContactInfo>();
                 cfg.CreateMap<ContactInfo, ContactInfoDto>();
 
             });
